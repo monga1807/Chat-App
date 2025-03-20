@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './ChatNav.css'
 // import Sidebarp from '../Sidebar';
-import AddImage from "./addimage";
+import AddImage from "./AddImage";
 import { useState } from "react";
 import { useEffect } from "react";
 import { db, collection, query, onSnapshot , where  } from "../../Firebase";
