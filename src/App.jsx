@@ -2,7 +2,7 @@ import './App.css'
 import Register from './assets/Register'
 import Login from './assets/Login'
 import Profile from './assets/Profile'
-import AddImage from './assets/profilecom/AddImage'
+// import AddImage from './assets/profilecom/AddImage'
 // import './Firebase'
 import { createBrowserRouter , RouterProvider } from 'react-router-dom'
 
@@ -23,10 +23,6 @@ function App() {
     {
       path:"/profile",
       element: <Profile/>
-    },
-    {
-      path:"/addimage",
-      element: <AddImage/>
     }
   ])
   return (
