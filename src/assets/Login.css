@@ -1,0 +1,129 @@
+/* .div{
+    background-color: black;
+    margin: 3px;
+    padding: 3px;
+    border: 2px solid;
+}  */
+/* .Login{
+    background-color: beige;
+    margin: 250px auto;
+    border: 1px solid;
+    width:320px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ .user{
+    margin:10px;
+    padding:10px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ .button{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ .signup{
+    display:flex;
+    align-items: end;
+    justify-content: end;
+    margin: 10px;
+ } */
+
+ /* Login.css */
+
+
+
+
+.lbody {
+   background-image:url(nodes.gif);
+   background-repeat: no-repeat;
+   background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   margin: 0;
+}
+
+.Login {
+   width: 350px;
+   padding: 30px;
+   background: #fff;
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+   border-radius: 10px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.user {
+   width: 100%;
+   margin-bottom: 15px;
+}
+
+label {
+   display: block;
+   font-size: 14px;
+   font-weight: bold;
+   margin-bottom: 5px;
+   color: #333;
+}
+
+input {
+   width: 100%;
+   padding: 10px;
+   font-size: 14px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   outline: none;
+   transition: 0.3s;
+}
+
+input:focus {
+   border-color: #007bff;
+}
+
+.button {
+   width: 100%;
+   text-align: center;
+   margin-top: 10px;
+}
+
+.button button {
+   width: 100%;
+   padding: 10px;
+   font-size: 16px;
+   border-radius: 5px;
+}
+
+.signup {
+   margin-top: 15px;
+   font-size: 14px;
+}
+
+.signup a {
+   color: #007bff;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+.signup a:hover {
+   text-decoration: underline;
+}
+
+.button :hover{
+   background-color: darkgrey;
+}
+.button-lshow{
+   position: absolute;
+    /* right: 30px;
+    bottom: 150px; */
+    border-radius: 50%;
+    right: 582px;
+    bottom: 359px;
+}
+

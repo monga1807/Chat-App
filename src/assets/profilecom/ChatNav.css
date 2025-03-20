@@ -1,0 +1,70 @@
+.bg-body {
+    background-color: #e9e9e9 !important; 
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  
+  /* Navbar Brand */
+  .bg-name {
+    color: #000000 !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-right: auto;
+    margin-left:15px;
+    text-decoration-line: none;
+  }
+  
+  /* Navbar Links */
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: auto !important;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #000000 !important;
+    font-size: 1rem;
+    margin-right: 15px;
+    white-space: nowrap;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #25D366 !important; /* WhatsApp accent color */
+  }
+  
+  /* Dropdown Menu */
+  .navbar-nav .nav-item {
+    position: relative;
+  }
+  
+  /* .log{
+    color: #000000 !important;
+  } */
+   
+  /* Navbar Toggle Button (if needed in the future) */
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #fff;
+  }
+  .contain {
+    display: flex;
+    justify-content: space-evenly;
+    /* align-content: space-between; */
+    min-width: 100%;
+  }
+  .ms-auto{
+    /* align-items: baseline; */
+   margin:0px;
+    /* justify-content: center; */
+  }
+  .log{
+    margin: 0;
+  }

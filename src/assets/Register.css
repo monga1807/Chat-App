@@ -1,0 +1,238 @@
+
+/* .div{
+    background-color: black;
+    margin: 3px;
+    padding: 3px;
+    border: 2px solid;
+}  */
+ /* .Register{
+    background-color: beige;
+    margin: 250px auto;
+    border: 1px solid;
+    width:400px;
+    height: 280px;
+   
+    justify-content: center;
+    align-items: center;
+ }
+ .user{
+    margin:10px;
+    padding:10px;
+    
+ }
+ .button{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ .login{
+   display:flex;
+    align-items: end;
+    justify-content: end;
+    margin: 10px;
+ } */
+
+ /* body {
+    background: linear-gradient(to right, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.Register {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.Register:hover {
+    transform: scale(1.02);
+}
+
+.user {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.user label {
+    display: block;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+.user input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.user input:focus {
+    border-color: #764ba2;
+    box-shadow: 0px 0px 8px rgba(118, 75, 162, 0.5);
+}
+
+.button {
+    margin-top: 1rem;
+}
+
+.button button {
+    width: 100%;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button button:hover {
+    background: linear-gradient(to right, #764ba2, #667eea);
+}
+
+.login {
+    margin-top: 1rem;
+}
+
+.login a {
+    color: #667eea;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.login a:hover {
+    color: #764ba2;
+} */
+
+/* Background Styling */
+ .rbody{
+   background: url('nodes.gif') no-repeat center center/cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   margin: 0;
+   font-family: 'Poppins', sans-serif;
+}
+
+/* Glassmorphic Form */
+.Register {
+   background: rgba(255, 255, 255, 0.2);
+   backdrop-filter: blur(15px);
+   -webkit-backdrop-filter: blur(15px);
+   padding: 2.5rem;
+   border-radius: 15px;
+   box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+   width: 400px;
+   text-align: center;
+   transition: 0.3s ease-in-out;
+   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.Register:hover {
+   transform: translateY(-5px);
+}
+
+/* Input Fields */
+.ruser {
+   margin-bottom: 1.5rem;
+   text-align: left;
+   
+}
+
+.ruser label {
+   display: block;
+   font-weight: 500;
+   color: #f7f7f7;
+   margin-bottom: 5px;
+}
+
+.ruser input {
+   width: 100%;
+   padding: 12px;
+   border: none;
+   border-radius: 10px;
+   font-size: 1rem;
+   outline: none;
+   transition: 0.3s;
+   background: rgba(255, 255, 255, 0.3);
+   color: #fcfcfc;
+}
+
+.ruser input::placeholder {
+   color: rgba(255, 255, 255, 0.7);
+}
+
+.ruser input:focus {
+   background: rgba(255, 255, 255, 0.5);
+   box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Submit Button */
+.rbutton {
+   margin-top: 1.5rem;
+}
+
+.rbutton button {
+   width: 100%;
+   background: linear-gradient(to right, #ff7eb3, #ff758c);
+   border: none;
+   padding: 12px;
+   font-size: 1rem;
+   font-weight: bold;
+   color: #fff;
+   border-radius: 10px;
+   cursor: pointer;
+   transition: 0.3s;
+}
+
+.rbutton button:hover {
+   transform: scale(1.05);
+   box-shadow: 0px 5px 15px rgba(255, 117, 140, 0.4);
+}
+
+/* Login Link */
+.rlogin {
+   margin-top: 1.2rem;
+}
+
+.rlogin a {
+   color: #fff;
+   font-weight: bold;
+   text-decoration: none;
+   transition: 0.3s;
+}
+
+.rlogin a:hover {
+   color: #ff7eb3;
+   text-decoration: underline;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 450px) {
+   .Register {
+       width: 90%;
+       padding: 2rem;
+   }
+}
+
+.button-show{
+   position: absolute;
+    right: 30px;
+    bottom: 150px; 
+}
