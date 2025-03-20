@@ -1,37 +1,20 @@
-import './App.css'
-import Register from './assets/Register'
-import Login from './assets/Login'
-import Profile from './assets/Profile'
-// import AddImage from './assets/profilecom/AddImage'
-// import './Firebase'
-import { createBrowserRouter , RouterProvider } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Register from './components/Register';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import './App.css';
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path:"/",
-      element: <Login/>
-    },
-    {
-      path:"/register",
-      element: <Register/>
-    },
-    {
-      path:"/login",
-      element: <Login/>
-    },
-    {
-      path:"/profile",
-      element: <Profile/>
-    }
-  ])
   return (
-    <>
-      <div>
-        <RouterProvider router={router}/>
-      </div>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
