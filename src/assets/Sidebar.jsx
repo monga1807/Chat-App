@@ -3,7 +3,7 @@ import "./Sidebar.css";
 import { db, collection, query, onSnapshot , where  } from "../Firebase";
 import { auth } from "../Firebase";
 import { useUser } from "./profilecom/UserContext";
-import AddImage from "./profilecom/addimage";
+import AddImage from "./profilecom/AddImage";
 
 
 const Sidebarp = ({ }) => {
