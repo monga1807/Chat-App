@@ -1,20 +1,33 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import './App.css'
 import Register from './assets/Register'
-import Login from './assets/Login';
-import Profile from './assets/Profile';
-import './App.css';
-
+import Login from './assets/Login'
+import Profile from './assets/Profile'
+import { createBrowserRouter , RouterProvider } from 'react-router-dom'
 function App() {
+  const router = createBrowserRouter([
+    {
+      path:"/myapp/",
+      element: <Login/>
+    },
+    {
+      path:"/myapp/register",
+      element: <Register/>
+    },
+    {
+      path:"/myapp/login",
+      element: <Login/>
+    },
+    {
+      path:"/myapp/profile",
+      element: <Profile/>
+    }
+  ])
   return (
-    <Router>
-      <Routes>
-        <Route path="/myapp/" element={<Login />} />
-        <Route path="/myapp/register" element={<Register />} />
-        <Route path="/myapp/login" element={<Login />} />
-        <Route path="/myapp/profile" element={<Profile />} />
-      </Routes>
-    </Router>
-  );
+      <div>
+        <RouterProvider router={router}/>
+      </div>
+  )
 }
+export default App
 
-export default App;

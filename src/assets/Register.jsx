@@ -37,7 +37,7 @@ function Register(){
 
             }
             console.log("User registered")
-            window.location.href = "/profile";
+            window.location.href = "/myapp/profile";
         } catch (error) {
             console.log(error.message)
         }
@@ -64,7 +64,7 @@ function Register(){
             </div>
             <div className="ruser">
                 <label>Password:
-                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password}/>
+                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password} autocomplete="new-password"/>
                 <button
                 type="button"
                 className="button-show"
@@ -79,7 +79,7 @@ function Register(){
                 <Button as="input" type="submit" value="Submit" />
             </div>
             <div className="rlogin"> 
-                <a href="/login">Already a user </a>
+                <a href="/myapp/login">Already a user </a>
             </div>
             
         </form>

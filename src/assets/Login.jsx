@@ -18,7 +18,7 @@ function Login(){
             const user = auth.currentUser;
             console.log(user);
             console.log("User registered")
-            window.location.href = "/profile";
+            window.location.href = "/myapp/profile";
         } catch (error) {
             console.log(error.message)
         }
@@ -35,7 +35,7 @@ function Login(){
             </div>
             <div className="user">
                 <label>Password:
-                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password}/>
+                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password} autocomplete="current-password"/>
                 <button
                 type="button"
                 className="button-lshow"
@@ -50,7 +50,7 @@ function Login(){
                 <Button variant="primary" type="submit">Log In</Button>
             </div>
             <div className="signup"> 
-                <a href="/register">New User</a>
+                <a href="/myapp/register">New User</a>
             </div>
             
         </form>

@@ -1,7 +1,8 @@
 
 
 .lbody {
-   background-image: url("./nodes.gif");
+   background: none;
+   background-image: url("/nodes.gif");
    background-repeat: no-repeat;
    background-size: cover;
    display: flex;

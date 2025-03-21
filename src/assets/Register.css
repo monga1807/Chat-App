@@ -121,7 +121,7 @@
 
 /* Background Styling */
  .rbody{
-   background: url('nodes.gif') no-repeat center center/cover;
+   background: url("/nodes.gif") no-repeat center center/cover;
    display: flex;
    justify-content: center;
    align-items: center;
