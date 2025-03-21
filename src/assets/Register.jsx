@@ -64,7 +64,7 @@ function Register(){
             </div>
             <div className="ruser">
                 <label>Password:
-                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password} autocomplete="new-password"/>
+                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password}/>
                 <button
                 type="button"
                 className="button-show"
