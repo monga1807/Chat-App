@@ -13,7 +13,7 @@ import { db  } from '../../Firebase';
 import { auth } from "../../Firebase";
 
 function AddImage(props) {
-    const { isOpen, handleCloseModel } = props;
+    const { isOpen, handleCloseModel , onImageUpdate } = props;
     const [user, setUser] = useState(null);
     // const [image, setImage] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -67,7 +67,10 @@ function AddImage(props) {
                     }
 
                     localStorage.setItem("savedImage", base64Image);
-                    updateProfileImage(base64Image);
+                    // updateProfileImage(base64Image);
+                    if (onImageUpdate) {
+                        onImageUpdate(base64Image);
+                    }
                     alert("Profile picture updated successfully!");
                     handleCloseModel();
                 } catch (error) {
@@ -78,22 +81,6 @@ function AddImage(props) {
         };
         reader.readAsDataURL(selectedFile);
 
-       // const reader = new FileReader();
-       // reader.onloadend = async() => {
-        //    const base64Image = reader.result;
-             //setImage(base64Image); // Update UIsetDoc (doc(db, "users",user.uid)
-
-    //          await addDoc(collection(db, "images"), {
-    //             imageUrl: base64Image,
-    //             createdAt: new Date()
-    // });
-           //  await addDoc(collection(db, "images"), {
-           //                imageUrl: base64Image,
-           //                createdAt: new Date()
-           //    });
-            //localStorage.setItem("savedImage", base64Image); // Save to local storage
-       // };
-       // reader.readAsDataURL(selectedFile);
     };
     const updateProfileImage = (image) => {
         document.querySelectorAll(".chat-item img").forEach(img => {

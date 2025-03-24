@@ -81,7 +81,7 @@ const ChatApp = () => {
           timestamp: new Date(),
           receiverUid: selectedUser?.id,
         });
-        console.log("Message sent:", { sender: user.uid, receiver: selectedUser?.id });
+        // console.log("Message sent:", { sender: user.uid, receiver: selectedUser?.id });
         setInput(""); // Clear input after sending
       } catch (error) {
         console.error("Error sending message:", error);
@@ -109,12 +109,12 @@ const ChatApp = () => {
               <div key={msg.id} className={`message ${msg.senderUid === user.uid ? "sent" : "received"}`}>
                 {msg.file ? (
                   <>
-                    {console.log(msg.file, "Image file check")}
+                    {/* {console.log(msg.file, "Image file check")} */}
                     <img src={msg.file} alt="Sent Image" style={{ maxWidth: "200px", borderRadius: "10px"  }} />
                   </>
                 ) : (
                   <>
-                    {console.log(msg.senderUid, user.uid, "Text message check")}
+                    {/* {console.log(msg.senderUid, user.uid, "Text message check")} */}
                     <span>{msg.text}</span>
                   </>
                 )}

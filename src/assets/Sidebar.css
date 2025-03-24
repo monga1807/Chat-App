@@ -7,17 +7,23 @@
   /* padding: 16px; */
   border-right: 1px solid #2a3942;
 }
+.add-image{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  margin-left: 30px;
+}
   
 .flex.items-center.bg.p-2.rounded-lg.mb-4 {
   display: flex;
   /* justify-content: center; */
   align-items: center;
   background-color: #ffffff;
-  padding: 10px;
+  padding: 5px;
   border-radius: 20px;
   margin-bottom: 16px;
   max-width: 65%;
-  margin-left: 50px;
+  margin-left: 30px;
   margin-top: 10px;
 }
   
@@ -31,7 +37,7 @@
   background: transparent;
   border: none;
   outline: none;
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 14px;
 }
   

@@ -12,6 +12,8 @@ import {
   onSnapshot,
   where ,
   getDocs,
+  doc,
+  getDoc,
 } from "firebase/firestore"; 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -38,4 +40,4 @@ export const db=getFirestore(app);
 export const storage=getStorage(app);
 // export const storageRef=getFirestore(app);
 export default app;
-export {  collection, addDoc, query, orderBy, onSnapshot, where, getDocs };
+export {  collection, addDoc, query, orderBy, onSnapshot, where, getDocs , doc , getDoc};

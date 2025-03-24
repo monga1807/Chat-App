@@ -14,13 +14,10 @@ import { auth } from "../../Firebase";
 function ChatNav() {
     const { selectedUser } = useUser();
 const [user, setUser] = useState(null);
-const [isOpen, setIsOpen] = useState(false);
+// const [isOpen, setIsOpen] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
   const [contacts, setContacts] = useState([]);
 
-  const handleCloseModel = () =>{
-    setIsOpen(false)
-   }
    
 useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -29,12 +26,13 @@ useEffect(() => {
     return () => unsubscribe();
   }, []);
 
-    useEffect(() => {
-        const storedImage = localStorage.getItem("savedImage");
-        if (storedImage) {
-          setProfileImage(storedImage);
-        }
-      }, []);
+
+    // useEffect(() => {
+    //     const storedImage = localStorage.getItem("savedImage");
+    //     if (storedImage) {
+    //       setProfileImage(storedImage);
+    //     }
+    //   }, []);
 
    useEffect(() => {
       if (!user) return; // Ensure user is available before fetching contacts
@@ -86,8 +84,8 @@ useEffect(() => {
   return (
     <Navbar expand="lg" className="bg-body">
       <Container className='contain'>
-        <div onClick={() => setIsOpen(true)}>
-      <img src={ profileImage || `https://i.pravatar.cc/40?u=`}  className="w-12 h-12 rounded-full" /></div>
+        <div>
+        <img src={ selectedUser?.imageUrl || "/default-avatar.png"} className="w-12 h-12 rounded-full"/></div>  
         <Navbar.Brand className='bg-name'>{selectedUser ? (
         <div className="flex items-center space-x-3">
           {/* <img
@@ -116,10 +114,7 @@ useEffect(() => {
        
         {/* <Navbar.Brand href="/login" className='log'>Log out</Navbar.Brand> */}
       </Container>
-      <AddImage 
-      isOpen={isOpen} 
-      handleCloseModel={handleCloseModel}
-       />
+      
     </Navbar>
   );
 }
