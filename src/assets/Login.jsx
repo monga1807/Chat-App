@@ -18,7 +18,7 @@ function Login(){
             const user = auth.currentUser;
             console.log(user);
             console.log("User registered")
-            window.location.href = "/myapp/profile";
+            window.location.href = "/profile";
         } catch (error) {
             console.log(error.message)
         }
@@ -50,7 +50,7 @@ function Login(){
                 <Button variant="primary" type="submit">Log In</Button>
             </div>
             <div className="signup"> 
-                <a href="/myapp/register">New User</a>
+                <a href="/register">New User</a>
             </div>
             
         </form>

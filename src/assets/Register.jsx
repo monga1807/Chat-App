@@ -37,7 +37,7 @@ function Register(){
 
             }
             console.log("User registered")
-            window.location.href = "/myapp/profile";
+            window.location.href = "/profile";
         } catch (error) {
             console.log(error.message)
         }
@@ -79,7 +79,7 @@ function Register(){
                 <Button as="input" type="submit" value="Submit" />
             </div>
             <div className="rlogin"> 
-                <a href="/myapp/login">Already a user </a>
+                <a href="/login">Already a user </a>
             </div>
             
         </form>
