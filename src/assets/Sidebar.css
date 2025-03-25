@@ -50,7 +50,7 @@
   border-bottom: 1px solid;
   display: flex;
   /* justify-content: space-around; */
-  gap: 50px;
+  gap: 10px;
   /* margin-left: 10px; */
   padding-left: 20px;
   align-items: center;
@@ -58,9 +58,10 @@
 }
 
 img.w-12.h-12.rounded-full {
-width: 30px;
-height: 30px;
+width: 45px;
+height: 45px;
 border-radius: 50px !important;
+margin: 3px;
 }
 
   

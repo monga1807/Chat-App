@@ -68,3 +68,10 @@
   .log{
     margin: 0;
   }
+
+  .chatnav-image{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px !important;
+    margin: 3px;
+  }

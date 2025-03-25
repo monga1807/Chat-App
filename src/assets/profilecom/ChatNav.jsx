@@ -85,7 +85,7 @@ useEffect(() => {
     <Navbar expand="lg" className="bg-body">
       <Container className='contain'>
         <div>
-        <img src={ selectedUser?.imageUrl || "/default-avatar.png"} className="w-12 h-12 rounded-full"/></div>  
+        <img src={ selectedUser?.imageUrl || "/default-avatar.png"} className="chatnav-image"/></div>  
         <Navbar.Brand className='bg-name'>{selectedUser ? (
         <div className="flex items-center space-x-3">
           {/* <img

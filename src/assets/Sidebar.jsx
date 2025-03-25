@@ -138,7 +138,7 @@ const Sidebarp = ({ }) => {
             onClick={() =>{
               onSelectChat(item.id);}}
           >
-            <div className="add-image"
+            <div className="show-image"
             //  onClick={() => setIsOpen(true)}
              >
            

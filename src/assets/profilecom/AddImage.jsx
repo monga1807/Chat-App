@@ -88,33 +88,6 @@ function AddImage(props) {
         });
     };
 
-    // const handleSave = async () => {
-    //     if (!selectedFile) {
-    //         alert("Please select an image first.");
-    //         return;
-    //     }
-        
-    //     const fileId = uuidv4(); // Generate a unique ID for the image
-    //     const storageRef = ref(storage, `images/${fileId}`);
-        
-        
-    //     try {
-    //         // Upload file to Firebase Storage
-    //          await uploadBytes(storageRef, selectedFile);
-    //          const downloadURL = await getDownloadURL(storageRef);
-
-    //         // Save image URL to Firestore
-    //         await addDoc(collection(db, "images"), {
-    //             imageUrl: downloadURL,
-    //             createdAt: new Date()
-    //         });
-
-    //         alert("Image uploaded successfully!");
-    //     } catch (error) {
-    //         console.error("Error uploading image: ", error);
-    //         alert("Error uploading image.");
-    //     }
-   // };
 
     // Clear the saved image
     // const handleClear = () => {
@@ -136,8 +109,14 @@ function AddImage(props) {
                         <form action="">
                             <input type="file" onChange={(e) => handleFile(e)}/>
                         </form>
+                        <div className="condition">
+                            <p>
+                                image should be less than 700kbs
+                            </p>
+                        </div><br />
+                        <div className="bu-addimage">
                         <Button variant="primary" type="submit" onClick={() => handleSave()}>Submit</Button>
-                        
+                        </div>
                        
                     </div>
                 </div>
