@@ -5,7 +5,6 @@ import { useUser } from "./profilecom/UserContext";
 import { db, collection, addDoc, query, orderBy, onSnapshot, auth, serverTimestamp} from "../Firebase";
 import ChatNav from './profilecom/ChatNav'
 import SendImage from "./profilecom/SendImage";
-// import EmojiPicker from 'emoji-picker-react';
 
 
 
@@ -15,9 +14,7 @@ const ChatApp = () => {
   const [user, setUser] = useState(null);
   const { selectedUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
-  // const [showPicker, setShowPicker] = useState(false);
-
-  // const pickerRef = useRef(null);
+  
 
 
   const handleCloseModel = () => {
@@ -90,7 +87,7 @@ const ChatApp = () => {
         });
         // console.log("Message sent:", { sender: user.uid, receiver: selectedUser?.id });
         setInput(""); // Clear input after sending
-        // setShowPicker(false);
+        setShowEmojiBox(false);
       } catch (error) {
         console.error("Error sending message:", error);
       }
@@ -104,22 +101,23 @@ const ChatApp = () => {
     }
   }, [messages]); // Runs every time messages update
    
-  //For emoji close clicks on outside 
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (pickerRef.current && !pickerRef.current.contains(event.target)) {
-  //       setShowPicker(false);
-  //     }
-  //   };
+  const emojiList = ["😀", "😂", "😅", "😊", "😍", "😎", "😭", "😡", "👍", "🙏", "🔥", "❤️"];
+  const [showEmojiBox, setShowEmojiBox] = useState(false);
+  const emojiBoxRef = useRef(null);
   
-  //   if (showPicker) {
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //   }
+  // Close emoji box on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (emojiBoxRef.current && !emojiBoxRef.current.contains(event.target)) {
+        setShowEmojiBox(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [showPicker]);
   
   
   return (
@@ -168,14 +166,38 @@ const ChatApp = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
         />
-        {/* <div className="insert-emoji" onClick={() => setShowPicker(!showPicker)}>😀</div>
-        {showPicker && (
-          <div ref={pickerRef} style={{ position: 'absolute', bottom: '60px', right: '20px', zIndex: 999 }}>
-            <EmojiPicker data={data} onEmojiSelect={(emoji) => {
-              setInput(prev => prev + emoji.native);
-            }} />
-          </div>
-        )} */}
+        <div className="insert-emoji" onClick={() => setShowEmojiBox(!showEmojiBox)}>😀</div>
+        {showEmojiBox && (
+    <div
+      ref={emojiBoxRef}
+      style={{
+        position: "absolute",
+        bottom: "60px",
+        left: "0",
+        background: "#fff",
+        border: "1px solid #ccc",
+        padding: "10px",
+        borderRadius: "8px",
+        display: "flex",
+        flexWrap: "wrap",
+        width: "220px",
+        zIndex: 1000,
+      }}
+    >
+      {emojiList.map((emoji, idx) => (
+        <span
+          key={idx}
+          onClick={() => {
+            setInput(prev => prev + emoji);
+            // setShowEmojiBox(false); // auto-close on selection
+          }}
+          style={{ fontSize: "22px", padding: "6px", cursor: "pointer" }}
+        >
+          {emoji}
+        </span>
+      ))}
+    </div>
+  )}
         <div className="insert-image" onClick={() => setIsOpen(true)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-card-image" viewBox="0 0 16 16">
             <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
