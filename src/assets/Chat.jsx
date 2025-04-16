@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./ChatApp.css";
 import "./Sidebar";
 import { useUser } from "./profilecom/UserContext";
-import { db, collection, addDoc, query, orderBy, onSnapshot, auth } from "../Firebase";
+import { db, collection, addDoc, query, orderBy, onSnapshot, auth, serverTimestamp} from "../Firebase";
 import ChatNav from './profilecom/ChatNav'
 import SendImage from "./profilecom/SendImage";
+// import { Picker } from 'emoji-mart'
+import Picker from '@emoji-mart/react'
+import data from '@emoji-mart/data'
+// import 'emoji-mart/css/emoji-mart.css';
 
 const ChatApp = () => {
   const [messages, setMessages] = useState([]);
@@ -12,6 +16,10 @@ const ChatApp = () => {
   const [user, setUser] = useState(null);
   const { selectedUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
+
+  const pickerRef = useRef(null);
+
 
   const handleCloseModel = () => {
     setIsOpen(false)
@@ -83,6 +91,7 @@ const ChatApp = () => {
         });
         // console.log("Message sent:", { sender: user.uid, receiver: selectedUser?.id });
         setInput(""); // Clear input after sending
+        setShowPicker(false);
       } catch (error) {
         console.error("Error sending message:", error);
       }
@@ -95,7 +104,25 @@ const ChatApp = () => {
       chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
     }
   }, [messages]); // Runs every time messages update
-
+   
+  //For emoji close clicks on outside 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (pickerRef.current && !pickerRef.current.contains(event.target)) {
+        setShowPicker(false);
+      }
+    };
+  
+    if (showPicker) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showPicker]);
+  
+  
   return (
     <div className="chat-container">
       <div className="Chat-Nav">
@@ -142,6 +169,14 @@ const ChatApp = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
         />
+        <div className="insert-emoji" onClick={() => setShowPicker(!showPicker)}>😀</div>
+        {showPicker && (
+          <div ref={pickerRef} style={{ position: 'absolute', bottom: '60px', right: '20px', zIndex: 999 }}>
+            <Picker data={data} onEmojiSelect={(emoji) => {
+              setInput(prev => prev + emoji.native);
+            }} />
+          </div>
+        )}
         <div className="insert-image" onClick={() => setIsOpen(true)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-card-image" viewBox="0 0 16 16">
             <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />

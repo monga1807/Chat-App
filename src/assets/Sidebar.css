@@ -31,7 +31,8 @@ border-radius: 5px;
 }
   
 .text-gray-400 {
-  color: #aebac1;
+  /* color: #aebac1; */
+  margin-left: 10px;
 }
   
 .ml-2.w-full.bg-transparent.outline-none.text-white.placeholder-gray-400 {

@@ -61,24 +61,6 @@ useEffect(() => {
       fetchContacts();
     }, [user]);    
 
-    // const  onSelectChat = (id) => {
-    //     setActiveChat(id);
-    //     try {
-    //       console.log(id)
-    
-    //       // to get the deail iofuser the in context 
-    //       const q = query(collection(db, "users"), where("id", "==", id));
-    //       const unsubscribe = onSnapshot(q,(snapshot) => {
-    //         if (!snapshot.empty) {
-    //           const selectedUserData = snapshot.docs[0].data();
-    //           setSelectedUser(selectedUserData);
-    //         }
-    //       });
-    //       return () => unsubscribe();
-    //     } catch (error) {
-    //        console.error(error);
-    //     }
-    //   }
       
 
   return (
@@ -88,16 +70,13 @@ useEffect(() => {
         <img src={ selectedUser?.imageUrl || "/default-avatar.png"} className="chatnav-image"/></div>  
         <Navbar.Brand className='bg-name'>{selectedUser ? (
         <div className="flex items-center space-x-3">
-          {/* <img
-            src={selectedUser.img}
-            alt="User Avatar"
-            className="w-10 h-10 rounded-full border border-white"
-          /> */}
           <h3 className="text-lg">{`${selectedUser.firstname} ${selectedUser.lastname}`}</h3>
         </div>
-      ) : (
+      )
+       : (
         <h4 className="text-lg">ChatApp</h4>
-      )}</Navbar.Brand>
+      )
+      }</Navbar.Brand>
         
         
           <Nav className="ms-auto">

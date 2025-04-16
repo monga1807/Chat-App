@@ -4,6 +4,9 @@ import { db, collection, query, onSnapshot , where , doc , getDoc } from "../Fir
 import { auth } from "../Firebase";
 import { useUser } from "./profilecom/UserContext";
 import AddImage from "./profilecom/AddImage";
+import ShimmerContact from "./profilecom/ShimmerContact";
+import { IoIosSearch } from "react-icons/io";
+
 
 
 const Sidebarp = ({ }) => {
@@ -118,7 +121,7 @@ const Sidebarp = ({ }) => {
             <img src={ profileImage}  className="w-12 h-12 rounded-full"/></div>
       <div className="flex items-center bg p-2 rounded-lg mb-4">
          
-        <span className="text-gray-400">🔍</span>
+        <span className="text-gray-400"><IoIosSearch /></span>
         <input
           type="text"
           placeholder="Search or start new chat"
@@ -129,7 +132,9 @@ const Sidebarp = ({ }) => {
       </div>
       </div>
       <div className="space-y-2 overflow-y-auto h">
-      {filteredContacts.map((item, index) => (
+      {contacts.length === 0 && user
+    ? Array(5).fill().map((_, index) => <ShimmerContact key={index} />)
+      :filteredContacts.map((item, index) => (
           <div 
             key={index} 
             // style={{ "--active-bg": activeChat === item.id ? "blue" : "transparent" }} 
@@ -138,9 +143,7 @@ const Sidebarp = ({ }) => {
             onClick={() =>{
               onSelectChat(item.id);}}
           >
-            <div className="show-image"
-            //  onClick={() => setIsOpen(true)}
-             >
+            <div className="show-image">
            
             <img src={item.imageUrl || "/default-avatar.png"} alt={item.firstname} className="w-12 h-12 rounded-full"/>      
             

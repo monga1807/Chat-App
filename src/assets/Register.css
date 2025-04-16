@@ -234,5 +234,6 @@
 .button-show{
    position: absolute;
     right: 30px;
-    bottom: 150px; 
+    bottom: 240px; 
+    border-radius: 50%;
 }

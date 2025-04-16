@@ -2,10 +2,11 @@
 import './Register.css'
 import Button from 'react-bootstrap/Button';
 
-import {auth , db } from "../Firebase";
+import {auth , db , provider} from "../Firebase";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {useState} from 'react';
-import { setDoc, doc} from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
+import { signInWithPopup } from 'firebase/auth';
 
 
 function Register(){
@@ -42,11 +43,44 @@ function Register(){
             console.log(error.message)
         }
     }
+    const handleGoogleLogin = async () => {
+           
+            try {
+              const result = await signInWithPopup(auth, provider);
+              const user = result.user;
+
+              let first = "";
+              let last = "";
+              if (user.displayName) {
+              const parts = user.displayName.split(" ");
+              first = parts[0];
+              last = parts.slice(1).join(" ");
+             }
+    
+              if (user){
+                              await setDoc (doc(db, "users",user.uid),{
+                                  id:user.uid,
+                                  email:user.email,
+                                  firstname:first,
+                                  lastname:last,
+                                  password:password,
+                              });
+              
+                          }
+    
+              console.log("User Info:", user);
+              window.location.href = "/profile";
+            } catch (err) {
+              console.error("Google login error:", err);
+            }
+        }
 
     return(
         <>
         <div className='rbody'>
-        <form className="Register" onSubmit={handleSave}>
+        <form className="Register" 
+        // onSubmit={handleSave}
+        >
             <div className="ruser">
                 <label>First Name:
                 <input type="text" placeholder='Enter First Name' onChange={(e) => setFname(e.target.value)} value={fname} />
@@ -76,7 +110,10 @@ function Register(){
                 </label>
             </div>
             <div className="rbutton">
-                <Button as="input" type="submit" value="Submit" />
+                <Button variant="primary"  onClick={handleSave} >Submit </Button>
+            </div>
+            <div className="rbutton">
+                <Button variant="primary"  onClick={handleGoogleLogin}>Signin with Google </Button>
             </div>
             <div className="rlogin"> 
                 <a href="/login">Already a user </a>

@@ -8,6 +8,7 @@ import { useState , useEffect } from 'react';
 // import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, doc , updateDoc, getDoc  } from 'firebase/firestore';
 // import { useUser } from "./UserContext";
+import { IoIosCloseCircle } from "react-icons/io";
 
 import { db  } from '../../Firebase';
 import { auth } from "../../Firebase";
@@ -104,18 +105,18 @@ function AddImage(props) {
                             <h4>
                                 Add your Image
                             </h4>
-                            <button onClick={() => handleCloseModel()} >X</button>
+                            <button onClick={() => handleCloseModel()} ><IoIosCloseCircle /></button>
                         </div>
                         <form action="">
                             <input type="file" onChange={(e) => handleFile(e)}/>
                         </form>
                         <div className="condition">
                             <p>
-                                image should be less than 700kbs
+                                Image should be less than 700kbs
                             </p>
                         </div><br />
                         <div className="bu-addimage">
-                        <Button variant="primary" type="submit" onClick={() => handleSave()}>Submit</Button>
+                        <Button variant="primary" onClick={() => handleSave()}>Submit</Button>
                         </div>
                        
                     </div>
