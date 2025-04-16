@@ -83,7 +83,7 @@ useEffect(() => {
 
   return (
     <Navbar expand="lg" className="bg-body">
-      <Container className='contain'>
+      <Container className='contain-chatnav'>
         <div>
         <img src={ selectedUser?.imageUrl || "/default-avatar.png"} className="chatnav-image"/></div>  
         <Navbar.Brand className='bg-name'>{selectedUser ? (

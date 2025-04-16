@@ -78,7 +78,7 @@ const ChatApp = () => {
         await addDoc(collection(db, "messages"), {
           text: input,
           senderUid: user.uid,
-          timestamp: new Date(),
+          timestamp: serverTimestamp(),
           receiverUid: selectedUser?.id,
         });
         // console.log("Message sent:", { sender: user.uid, receiver: selectedUser?.id });
@@ -104,13 +104,17 @@ const ChatApp = () => {
       <div className="chat-box">
 
         {messages.map((msg) => {
+          const formattedTime = msg.timestamp?.toDate
+          ? msg.timestamp.toDate().toLocaleString()
+          : "Sending..."; // ✅ display fallback if not yet saved
+
           return <>
             
               <div key={msg.id} className={`message ${msg.senderUid === user.uid ? "sent" : "received"}`}>
                 {msg.file ? (
                   <>
                     {/* {console.log(msg.file, "Image file check")} */}
-                    <img src={msg.file} alt="Sent Image" style={{ maxWidth: "200px", borderRadius: "10px"  }} />
+                    <img src={msg.file} alt="Sent Image"  style={{ maxWidth: "200px", borderRadius: "10px" }} />
                   </>
                 ) : (
                   <>
@@ -118,6 +122,9 @@ const ChatApp = () => {
                     <span>{msg.text}</span>
                   </>
                 )}
+                <div className="timestamp" style={{ fontSize: "10px", color: "#aaa", marginTop: "4px" }}>
+                {formattedTime}
+              </div>
               </div>
             
 
@@ -128,7 +135,7 @@ const ChatApp = () => {
         <input
           type="text"
           className="chat-input"
-          placeholder="Type a message..."
+          placeholder="Write a message..."
           name='messages'
           value={input}
           // onChange={(e) => console.log(e.target.value)}

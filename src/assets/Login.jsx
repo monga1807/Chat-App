@@ -1,7 +1,7 @@
 import './Login.css'
 import Button from 'react-bootstrap/Button';
-
-import {auth} from "../Firebase";
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../Firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import {useState} from 'react';
 
@@ -23,19 +23,30 @@ function Login(){
             console.log(error.message)
         }
     }
+    const handleGoogleLogin = async () => {
+       
+        try {
+          const result = await signInWithPopup(auth, provider);
+          const user = result.user;
+          console.log("User Info:", user);
+          window.location.href = "/profile";
+        } catch (err) {
+          console.error("Google login error:", err);
+        }
+    };
 
     return(
         <>
         <div className='lbody'>
-        <form className="Login" onSubmit={handleSave}>
+        <form className="Login" >
             <div className="user">
                 <label>Email:
-                <input type="text" placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} value={email} />
+                <input type="text" placeholder='Enter Email' autoComplete="email" onChange={(e) => setEmail(e.target.value)} value={email} />
                 </label>
             </div>
             <div className="user">
                 <label>Password:
-                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password}/>
+                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                 <button
                 type="button"
                 className="button-lshow"
@@ -47,7 +58,11 @@ function Login(){
             </div>
             <div className="button">
                 {/* <Button as="input" type="submit" value="Submit" /> */}
-                <Button variant="primary" type="submit">Log In</Button>
+                <Button variant="primary" onClick={handleSave}>Log In</Button>
+            </div>
+            <div className="button">
+                {/* <Button as="input" type="submit" value="Submit" /> */}
+                <Button variant="primary"  onClick={handleGoogleLogin}>Signin with Google </Button>
             </div>
             <div className="signup"> 
                 <a href="/register">New User</a>

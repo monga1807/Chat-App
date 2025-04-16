@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
+import { getAuth , GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { 
@@ -24,6 +24,7 @@ import {
 const firebaseConfig = {
   apiKey: "AIzaSyC5at0EQ5xEaKcGjgoW9oEXC3uNaCRiAMc",
   authDomain: "chat-app-3713f.firebaseapp.com",
+  databaseURL: "https://chat-app-3713f-default-rtdb.firebaseio.com",
   projectId: "chat-app-3713f",
   storageBucket: "chat-app-3713f.firebasestorage.app",
   messagingSenderId: "334284705559",
@@ -34,7 +35,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
+export const provider = new GoogleAuthProvider();
 export const auth=getAuth(app);
 export const db=getFirestore(app);
 export const storage=getStorage(app);
