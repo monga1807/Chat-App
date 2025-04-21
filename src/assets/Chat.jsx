@@ -285,6 +285,12 @@ const remoteVideoRef = useRef(null);
     if (localVideoRef.current?.srcObject) {
       localVideoRef.current.srcObject.getTracks().forEach(track => track.stop());
     }
+
+    if (remoteVideoRef.current?.srcObject) {
+      remoteVideoRef.current.srcObject.getTracks().forEach(track => track.stop());
+      remoteVideoRef.current.srcObject = null;
+    }
+    
     setPeer(null);
     setInCall(false);
     setCallId(null);

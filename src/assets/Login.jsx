@@ -25,34 +25,12 @@ function Login(){
             alert("invalid credentials");
         };
     };
-    // const handleGoogleLogin = async () => {
-       
-    //     try {
-    //       const result = await signInWithPopup(auth, provider);
-    //       const user = result.user;
-
-    //       if (user){
-    //                       await setDoc (doc(db, "users",user.uid),{
-    //                           id:user.uid,
-    //                           email:user.email,
-    //                           firstname:fname,
-    //                           lastname:lname,
-    //                           password:password,
-    //                       });
-          
-    //                   }
-
-    //       console.log("User Info:", user);
-    //       window.location.href = "/profile";
-    //     } catch (err) {
-    //       console.error("Google login error:", err);
-    //     }
-    // }
+  
 
     return(
         <>
         <div className='lbody'>
-        <form className="Login" >
+        <form className="Login" onSubmit={handleSave}>
             <div className="user">
                 <label>Email:
                 <input type="text" placeholder='Enter Email' autoComplete="email" onChange={(e) => setEmail(e.target.value)} value={email} />
@@ -72,7 +50,7 @@ function Login(){
             </div>
             <div className="button">
                 {/* <Button as="input" type="submit" value="Submit" /> */}
-                <Button variant="primary" onClick={handleSave}>Log In</Button>
+                <Button variant="primary" type="submit">Log In</Button>
             </div>
             {/* <div className="button">
                 <Button variant="primary"  onClick={handleGoogleLogin}>Signin with Google </Button>
