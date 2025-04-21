@@ -86,6 +86,7 @@ function SendImage(props) {
         return;
     }
     console.log("File to be saved:", selectedFile);
+    handleCloseModel();
 
         
         const reader = new FileReader();
@@ -105,7 +106,7 @@ function SendImage(props) {
                     console.log("Message sent:", { sender: user.uid, receiver: selectedUser.id });
                     // alert("Image sent in chat successfully!");
                     // setInput("");
-                }
+                  }
                 handleCloseModel();
             } catch (error) {
                 console.error("Error sending image message:", error);

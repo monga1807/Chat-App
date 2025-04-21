@@ -99,3 +99,19 @@
   border-radius: 5px;
   
 }
+
+.video-call-box {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #000;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  z-index: 999;
+}
+.local-video, .remote-video {
+  width: 160px;
+  height: 120px;
+  border-radius: 10px;
+}

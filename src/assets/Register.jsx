@@ -33,7 +33,7 @@ function Register(){
                     email:user.email,
                     firstname:fname,
                     lastname:lname,
-                    password:password,
+                    password:"",
                 });
 
             }
@@ -64,7 +64,7 @@ function Register(){
                                   firstname:first,
                                   lastname:last,
                                   password:password,
-                              });
+                              }, { merge: true });
               
                           }
     

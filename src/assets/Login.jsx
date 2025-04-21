@@ -18,12 +18,13 @@ function Login(){
             await signInWithEmailAndPassword(auth,email,password);
             const user = auth.currentUser;
             console.log(user);
-            console.log("User registered")
+            console.log("User registered");
             window.location.href = "/profile";
         } catch (error) {
-            console.log(error.message)
-        }
-    }
+            console.log(error.message);
+            alert("invalid credentials");
+        };
+    };
     // const handleGoogleLogin = async () => {
        
     //     try {
