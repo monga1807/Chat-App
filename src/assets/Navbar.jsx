@@ -3,8 +3,25 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Navbar.css'
+import {  auth } from "../Firebase";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 function BasicExample( {toggleSidebar}) {
+  const navigate = useNavigate();
+
+ 
+const handleLogout = async () => {
+  try {
+    await signOut(auth);
+    navigate("/login"); // manually navigate after signout
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+};
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container className='contain'>
@@ -28,7 +45,7 @@ function BasicExample( {toggleSidebar}) {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse> */}
-        <Navbar.Brand href="/login" className='log'>Log out</Navbar.Brand>
+        <Navbar.Brand   onClick={() => handleLogout()} className='log'>Log out</Navbar.Brand>
       </Container>
     </Navbar>
   );

@@ -18,11 +18,15 @@ function Login(){
     const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate("/profile");
       }
+      else {
+        // optional: navigate("/login"); // or stay on current route
+      }
     });
+    return () => unsubscribe(); 
   }, [navigate]);
 
     const handleSave= async(e)=>{
