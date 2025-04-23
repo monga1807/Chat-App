@@ -4,10 +4,11 @@ import Navbar from 'react-bootstrap/Navbar';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Navbar.css'
 
-function BasicExample() {
+function BasicExample( {toggleSidebar}) {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container className='contain'>
+      <button className="menu-btn" onClick={() => toggleSidebar()}>☰</button>
         <Navbar.Brand href="#home">ChatApp</Navbar.Brand>
         {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
         {/* <Navbar.Collapse id="basic-navbar-nav">

@@ -50,6 +50,8 @@ const remoteVideoRef = useRef(null);
   //     const loadedMessages = snapshot.docs.map((doc) => ({
   //       id: doc.id,
   //       ...doc.data(),
+
+  
   //     }));
   //     setMessages(loadedMessages);
   //   });
@@ -89,17 +91,17 @@ const remoteVideoRef = useRef(null);
   useEffect(() => {
     if (!user || !selectedUser) return;
   
-    console.log("✅ Setting up Firestore listener");
+    // console.log("✅ Setting up Firestore listener");
     const q = query(
       collection(db, "messages"),
       orderBy("timestamp", "asc")
     );
   
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      console.log("📸 Firestore snapshot triggered");
-      console.log("🔢 Number of docs:", snapshot.docs.length);
+      // console.log("📸 Firestore snapshot triggered");
+      // console.log("🔢 Number of docs:", snapshot.docs.length);
       snapshot.docChanges().forEach(change => {
-        console.log(`📝 Change type: ${change.type} | id: ${change.doc.id}`);
+        // console.log(`📝 Change type: ${change.type} | id: ${change.doc.id}`);
       });
   
       const loadedMessages = snapshot.docs
@@ -342,40 +344,40 @@ const remoteVideoRef = useRef(null);
   return (
     <div className="chat-container">
       <div className="Chat-Nav">
-        <ChatNav onStartCall={() =>handleStartCall()}/>
+        <ChatNav onStartCall={() => handleStartCall() } />
       </div>
       <div className="chat-box">
-      {inCall && (
-  <div className="video-call-box">
-    <video ref={localVideoRef} autoPlay muted playsInline className="local-video" />
-    <video ref={remoteVideoRef} autoPlay playsInline className="remote-video" />
-  </div>
-)}{inCall && (
-  <button onClick={() =>  handleEndCall()}>❌ End Call</button>
-)}
+        {inCall && (
+          <div className="video-call-box">
+            <video ref={localVideoRef} autoPlay muted playsInline className="local-video" />
+            <video ref={remoteVideoRef} autoPlay playsInline className="remote-video" />
+          </div>
+        )}{inCall && (
+          <button onClick={() => handleEndCall()}>❌ End Call</button>
+        )}
 
 
         {messages.map((msg) => {
           const formattedTime = msg.timestamp?.toDate
-          ? msg.timestamp.toDate().toLocaleString()
-          : "Sending..."; // ✅ display fallback if not yet saved
+            ? msg.timestamp.toDate().toLocaleString()
+            : "Sending..."; // ✅ display fallback if not yet saved
 
           return <>
-            
-              <div key={msg.id} className={`message ${msg.senderUid === user.uid ? "sent" : "received"}`}>
-                {msg.file ? (
-                  <>
-                    {/* {console.log(msg.file, "Image file check")} */}
-                    <img src={msg.file} alt="Sent Image"  style={{ maxWidth: "200px", borderRadius: "10px" }} />
-                  </>
-                ) : (
-                  <>
-                    {/* {console.log(msg.senderUid, user.uid, "Text message check")} */}
-                    <span>{msg.text}</span>
-                    {msg.edited && <span style={{ fontSize: "10px", marginLeft: "6px", color: "#888" }}>(edited)</span>}
-                  </>
-                )}
-                <div className="timestamp" style={{ fontSize: "10px", color: "#aaa", marginTop: "4px" }}>
+
+            <div key={msg.id} className={`message ${msg.senderUid === user.uid ? "sent" : "received"}`}>
+              {msg.file ? (
+                <>
+                  {/* {console.log(msg.file, "Image file check")} */}
+                  <img src={msg.file} alt="Sent Image" style={{ maxWidth: "200px", borderRadius: "10px" }} />
+                </>
+              ) : (
+                <>
+                  {/* {console.log(msg.senderUid, user.uid, "Text message check")} */}
+                  <span>{msg.text}</span>
+                  {msg.edited && <span style={{ fontSize: "10px", marginLeft: "6px", color: "#888" }}>(edited)</span>}
+                </>
+              )}
+              <div className="timestamp" style={{ fontSize: "10px", color: "#aaa", marginTop: "4px" }}>
                 {formattedTime}
               </div>
               {msg.senderUid === user.uid && (
@@ -389,8 +391,8 @@ const remoteVideoRef = useRef(null);
                   <button onClick={() => handleDeleteMessage(msg.id)}>Delete</button>
                 </div>
               )}
-              </div>
-            
+            </div>
+
 
           </>
         })}
@@ -408,36 +410,36 @@ const remoteVideoRef = useRef(null);
         />
         <div className="insert-emoji" onClick={() => setShowEmojiBox(!showEmojiBox)}>😀</div>
         {showEmojiBox && (
-    <div
-      ref={emojiBoxRef}
-      style={{
-        position: "absolute",
-        bottom: "60px",
-        left: "0",
-        background: "#fff",
-        border: "1px solid #ccc",
-        padding: "10px",
-        borderRadius: "8px",
-        display: "flex",
-        flexWrap: "wrap",
-        width: "220px",
-        zIndex: 1000,
-      }}
-    >
-      {emojiList.map((emoji, idx) => (
-        <span
-          key={idx}
-          onClick={() => {
-            setInput(prev => prev + emoji);
-            // setShowEmojiBox(false); // auto-close on selection
-          }}
-          style={{ fontSize: "22px", padding: "6px", cursor: "pointer" }}
-        >
-          {emoji}
-        </span>
-      ))}
-    </div>
-  )}
+          <div
+            ref={emojiBoxRef}
+            style={{
+              position: "absolute",
+              bottom: "60px",
+              left: "0",
+              background: "#fff",
+              border: "1px solid #ccc",
+              padding: "10px",
+              borderRadius: "8px",
+              display: "flex",
+              flexWrap: "wrap",
+              width: "220px",
+              zIndex: 1000,
+            }}
+          >
+            {emojiList.map((emoji, idx) => (
+              <span
+                key={idx}
+                onClick={() => {
+                  setInput(prev => prev + emoji);
+                  // setShowEmojiBox(false); // auto-close on selection
+                }}
+                style={{ fontSize: "22px", padding: "6px", cursor: "pointer" }}
+              >
+                {emoji}
+              </span>
+            ))}
+          </div>
+        )}
         <div className="insert-image" onClick={() => setIsOpen(true)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-card-image" viewBox="0 0 16 16">
             <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />

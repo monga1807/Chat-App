@@ -6,21 +6,25 @@ import SideBarp from './Sidebar'
 import ChatApp from './Chat'
 import EmptyChat from './EmptyChat';
 import { useUser } from "./profilecom/UserContext";
+import { useState } from 'react';
 
 function ChatContainer() {
   const { selectedUser } = useUser();
-
   return selectedUser ? <ChatApp /> : <EmptyChat />;
 }
 function Profile(){
   // const { selectedUser } = useUser();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
     return(
     <>
-    <div><BasicExample/></div>
+   
+<UserProvider>
+    <div><BasicExample  toggleSidebar={() => setSidebarOpen(prev => !prev)}/></div>
     <div className='pro'>
-    <UserProvider> 
-      <SideBarp/>
-     <ChatContainer/>
+     
+      <SideBarp className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`} onChatSelect={() => setSidebarOpen(false)} />
+ {sidebarOpen && ( <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)}></div>)}
+     <ChatContainer />
       {/* {selectedUser ? (
         <ChatApp/>
       )
@@ -28,10 +32,10 @@ function Profile(){
         <EmptyChat/>
       )} */}
       
-    </UserProvider>
+    
         
-    </div>
+    </div></UserProvider>
     </>
-)
+);
 }
 export default Profile;

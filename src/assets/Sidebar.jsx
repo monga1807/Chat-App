@@ -9,7 +9,7 @@ import { IoIosSearch } from "react-icons/io";
 
 
 
-const Sidebarp = ({ }) => {
+const Sidebarp = ({ className , onChatSelect }) => {
   const [search, setSearch] = useState("");
   const [contacts, setContacts] = useState([]);
   const [user, setUser] = useState(null);
@@ -104,6 +104,7 @@ const Sidebarp = ({ }) => {
         if (!snapshot.empty) {
           const selectedUserData = snapshot.docs[0].data();
           setSelectedUser(selectedUserData);
+          if (onChatSelect) onChatSelect(); 
         }
       });
       return () => unsubscribe();
@@ -113,7 +114,8 @@ const Sidebarp = ({ }) => {
   }
    
   return (
-    <div className="w-80 h-screen bg text-white p-4 border-r border-gray-700">
+    <div className={`w-80 h-screen bg text-white p-4 border-r border-gray-700 ${className}`}>
+     {/* <div className="w-80 h-screen bg text-white p-4 border-r border-gray-700">  */}
       <div className="add-image">
       <div
              onClick={() => setIsOpen(true)}

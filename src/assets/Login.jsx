@@ -3,14 +3,27 @@ import Button from 'react-bootstrap/Button';
 // import { signInWithPopup } from 'firebase/auth';
 import { auth } from '../Firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import {useState} from 'react';
+import {useState , useEffect} from 'react';
 // import { setDoc, doc} from "firebase/firestore";
+import { onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import AuthWrapper from './AuthWrapper';
 
 
 function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+
+    const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/profile");
+      }
+    });
+  }, [navigate]);
 
     const handleSave= async(e)=>{
         e.preventDefault();
@@ -29,6 +42,7 @@ function Login(){
 
     return(
         <>
+        <AuthWrapper />
         <div className='lbody'>
         <form className="Login" onSubmit={handleSave}>
             <div className="user">

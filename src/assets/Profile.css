@@ -11,3 +11,126 @@
     margin: 0;
     padding: 0;
 }
+
+/* .pro { */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* height: calc(100vh - 60px);  */
+    /* assuming navbar height ~60px */
+    /* overflow: hidden; */
+  /* } */
+  
+  /* Sidebar styles */
+  /* .pro > :first-child {
+    width: 300px;
+    min-width: 250px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+  }
+  
+  
+  .pro > :last-child {
+    flex: 1;
+    background-color: #fff;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+  } */
+  
+@media (max-width: 768px) {
+    /* .pro {
+      flex-direction: column;
+    } */
+  
+    .pro > :first-child {
+      /* width: 100%; */
+      border-right: none;
+      /* display: none;  */
+      border-bottom: 1px solid #ddd;
+    }
+  
+    
+    .pro > :last-child {
+      /* width: 100%; */
+      width: 768px;
+      flex: 1;
+      /* height: 1000px; */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .pro > :first-child {
+      /* display: none;  */
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+    }
+    .chat-container{
+      width: 100%;
+    }
+    .pro > :last-child {
+      width: 100%;
+      flex: 1;
+      min-width: 400px;
+    }
+  }
+
+  /* Base sidebar style */
+  /* .sidebar {
+    position: fixed;
+    top: 56px; 
+    left: 0;
+    width: 320px;
+    height: calc(100% - 56px);
+    background-color: #1f1f1f;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  } */
+  /* .sidebar {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+  } */
+  
+  /* .sidebar.closed {
+    transform: translateX(-100%);
+    position: absolute;
+    z-index: 1000;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+    position: absolute;
+    z-index: 1000;
+  }
+   */
+  
+  /* Mobile behavior */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: absolute;
+      z-index: 1000;
+      height: 100%;
+      transform: translateX(-100%);
+    }
+  
+    .sidebar.open {
+      transform: translateX(0); /* Slide in */
+    }
+  
+    .sidebar.closed {
+      transform: translateX(-100%); /* Slide out */
+    }
+  }
+  .sidebar-backdrop {
+    position: fixed;
+    top: 60px; 
+    
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px);
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+  }
+  
