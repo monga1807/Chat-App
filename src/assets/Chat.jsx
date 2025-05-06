@@ -8,6 +8,9 @@ import ChatNav from './profilecom/ChatNav'
 import SendImage from "./profilecom/SendImage";
 import Peer from "simple-peer";
 import { getDoc, setDoc, doc as firestoreDoc, collection as firestoreCollection } from "firebase/firestore";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 
 
@@ -25,7 +28,8 @@ const [inCall, setInCall] = useState(false);
 const localVideoRef = useRef(null);
 const remoteVideoRef = useRef(null);
 
-  
+
+const [openDropdownId, setOpenDropdownId] = useState(null);
 
 
   const handleCloseModel = () => {
@@ -218,7 +222,23 @@ const remoteVideoRef = useRef(null);
     newPeer.on("signal", async (data) => {
       await setDoc(callRef, { offer: data, caller: user.uid, callee: selectedUser.id });
     });
-  
+  // Add local ICE candidates to offerCandidates
+newPeer.on("icecandidate", async (event) => {
+  if (event.candidate) {
+    await addDoc(offerCandidates, event.candidate.toJSON());
+  }
+});
+
+// Listen for remote ICE candidates from answerCandidates
+onSnapshot(answerCandidates, (snapshot) => {
+  snapshot.docChanges().forEach((change) => {
+    if (change.type === "added") {
+      const candidate = new RTCIceCandidate(change.doc.data());
+      newPeer.signal(candidate);
+    }
+  });
+});
+
     onSnapshot(callRef, (doc) => {
       const data = doc.data();
       if (data?.answer) {
@@ -261,6 +281,23 @@ const remoteVideoRef = useRef(null);
     newPeer.on("signal", async (data) => {
       await setDoc(callRef, { answer: data }, { merge: true });
     });
+    // Add local ICE candidates to answerCandidates
+newPeer.on("icecandidate", async (event) => {
+  if (event.candidate) {
+    await addDoc(answerCandidates, event.candidate.toJSON());
+  }
+});
+
+// Listen for remote ICE candidates from offerCandidates
+onSnapshot(offerCandidates, (snapshot) => {
+  snapshot.docChanges().forEach((change) => {
+    if (change.type === "added") {
+      const candidate = new RTCIceCandidate(change.doc.data());
+      newPeer.signal(candidate);
+    }
+  });
+});
+
   
     newPeer.signal(callData.offer);
   
@@ -339,7 +376,14 @@ const remoteVideoRef = useRef(null);
     return () => unsubscribe();
   }, [user, inCall, callId]);
   
+  const toggleDropdown = (msgId) => {
+    openDropdownId===msgId ? setOpenDropdownId(null):  setOpenDropdownId(msgId);
+    // openDropdownId === msgId
+    // ? setOpenDropdownId(null)
+    // : setOpenDropdownId(msgId);
+  };
   
+  const closeDropdown = () => setOpenDropdownId(false);
   
   return (
     <div className="chat-container">
@@ -357,45 +401,78 @@ const remoteVideoRef = useRef(null);
         )}
 
 
-        {messages.map((msg) => {
-          const formattedTime = msg.timestamp?.toDate
-            ? msg.timestamp.toDate().toLocaleString()
-            : "Sending..."; // ✅ display fallback if not yet saved
+{messages.map((msg) => {
+  
+ 
 
-          return <>
+  const formattedTime = msg.timestamp?.toDate
+    ? msg.timestamp.toDate().toLocaleString()
+    : "Sending...";
 
-            <div key={msg.id} className={`message ${msg.senderUid === user.uid ? "sent" : "received"}`}>
-              {msg.file ? (
-                <>
-                  {/* {console.log(msg.file, "Image file check")} */}
-                  <img src={msg.file} alt="Sent Image" style={{ maxWidth: "200px", borderRadius: "10px" }} />
-                </>
-              ) : (
-                <>
-                  {/* {console.log(msg.senderUid, user.uid, "Text message check")} */}
-                  <span>{msg.text}</span>
-                  {msg.edited && <span style={{ fontSize: "10px", marginLeft: "6px", color: "#888" }}>(edited)</span>}
-                </>
-              )}
-              <div className="timestamp" style={{ fontSize: "10px", color: "#aaa", marginTop: "4px" }}>
-                {formattedTime}
-              </div>
-              {msg.senderUid === user.uid && (
-                <div style={{ marginTop: "5px", display: "flex", gap: "8px" }}>
-                  <button onClick={() => {
-                    const newText = prompt("Edit your message:", msg.text);
-                    if (newText !== null) handleEditMessage(msg.id, newText);
-                  }}>
-                    Edit
-                  </button>
-                  <button onClick={() => handleDeleteMessage(msg.id)}>Delete</button>
-                </div>
-              )}
-            </div>
+  return (
+    <div key={msg.id} className={`message ${msg.senderUid === user.uid ? "sent" : "received"}`}>
+      <Dropdown show={openDropdownId === msg.id}>
+  <Dropdown.Toggle
+    as="div"
+    variant="light"
+    id={`dropdown-${msg.id}`}
+    onClick={() =>
+      setOpenDropdownId(prev => (prev === msg.id ? null : msg.id))
+      // toggleDropdown()
+    }
+    style={{ cursor: "pointer" }}
+  >
+    <BsThreeDotsVertical />
+  </Dropdown.Toggle>
 
+  <Dropdown.Menu align="end">
+    <Dropdown.Item
+      as="button"
+      className="edit-del-button"
+      onClick={() => {
+        handleDeleteMessage(msg.id);
+        setOpenDropdownId(null); // close on delete
+        closeDropdown(false);
+      }}
+    >
+      Delete
+    </Dropdown.Item>
 
-          </>
-        })}
+    {msg.senderUid === user.uid && (
+      <Dropdown.Item
+        as="button"
+        className="edit-del-button"
+        onClick={() => {
+          const newText = prompt("Edit your message:", msg.text);
+          if (newText !== null) {
+            handleEditMessage(msg.id, newText);
+          }
+          setOpenDropdownId(null); // close on edit
+          closeDropdown();
+        }}
+      >
+        Edit
+      </Dropdown.Item>
+    )}
+  </Dropdown.Menu>
+</Dropdown>
+
+      {msg.file ? (
+        <img src={msg.file} alt="Sent Image" style={{ maxWidth: "200px", borderRadius: "10px" }} />
+      ) : (
+        <>
+          <span>{msg.text}</span>
+          {msg.edited && <span style={{ fontSize: "10px", marginLeft: "6px", color: "#888" }}>(edited)</span>}
+        </>
+      )}
+
+      <div className="timestamp" style={{ fontSize: "10px", color: "#aaa", marginTop: "4px" }}>
+        {formattedTime}
+      </div>
+    </div>
+  );
+})}
+
       </div>
       <div className="input-area">
         <input

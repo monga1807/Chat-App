@@ -115,6 +115,28 @@
   height: 120px;
   border-radius: 10px;
 }
+
+.edit-del-button {
+  margin-top: 5px;
+  background-color: #007bff;
+  border-radius: 20px;
+  padding: 5px;
+  margin-right: 5px;
+  display: flex;
+}
+.edit-del{
+  display: flex;
+  gap: 5px;
+}
+/* .dropdown12{
+  width: 60px;
+  height: 70px;
+  background-color: #a8a8a8;
+  position: absolute;
+  align-content: center;
+  justify-items: center;
+} */
+
 @media screen and (max-width: 768px) {
   .chat-container {
     padding: 0;
